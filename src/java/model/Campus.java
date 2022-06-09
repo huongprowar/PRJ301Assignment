@@ -4,6 +4,9 @@
  */
 package model;
 
+import java.util.ArrayList;
+import model.Employee;
+
 /**
  *
  * @author Nam
@@ -12,6 +15,7 @@ public class Campus {
 
     private int cid;
     private String cname;
+    private ArrayList<Employee> campuslist;
 
     public int getCid() {
         return cid;

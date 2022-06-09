@@ -10,52 +10,54 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Campus;
+import model.Account;
+import model.Employee;
 
 /**
  *
  * @author Nam
  */
-public class CampusDBContext extends DBContext<Campus>{
+public class AccountDBContext extends DBContext<Account> {
 
-    @Override
-    public ArrayList<Campus> list() {
-        ArrayList<Campus> campusList = new ArrayList<>();
+    public Account getAccByUserAndPass(String user, String pass) {
         try {
-            String sql = "select cID, cName from Campus";
+            String sql = "select username, eid from EAccount\n"
+                    + "where username = ? and password = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
-                Campus cam = new Campus();
-                cam.setCid(rs.getInt("cID"));
-                cam.setCname(rs.getString("cName"));
-                campusList.add(cam);
+            if (rs.next()) {
+                Account acc = new Account();
+                acc.setUsername(rs.getString("username"));
+                Employee e = 
             }
-            return campusList;
         } catch (SQLException ex) {
-            Logger.getLogger(CampusDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
     }
 
     @Override
-    public Campus get(String id) {
+    public ArrayList<Account> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void insert(Campus model) {
+    public Account get(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Campus model) {
+    public void insert(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Campus model) {
+    public void update(Account model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    @Override
+    public void delete(Account model) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

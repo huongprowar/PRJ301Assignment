@@ -13,15 +13,17 @@
         <title>JSP Page</title>
     </head>
     <body>
+        Username: <input type="text" name="user"><br/>
+        Password: <input type="text" name="pass"><br/>
         <form action="create" method="POST">
-            Campus: <select name="cid">
+            Campus: <select name="cid" required="required">
                 <c:forEach items="${requestScope.cList}" var="d">
                     <option 
                         <c:if test="${param.cid eq d.cid}">selected="selected"</c:if>
                         value="${d.cid}">${d.cname}</option>
                 </c:forEach>
             </select> <br/>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Login" />
         </form>
     </body>
 </html>

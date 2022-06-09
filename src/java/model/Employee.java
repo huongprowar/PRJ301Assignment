@@ -13,8 +13,8 @@ import java.util.Date;
 public class Employee {
     private int eid;
     private String ename;
-    private Date date;
-    private boolean gender;
+//    private Date date;
+//    private boolean gender;
     private int campus;
 
     public int getEid() {
@@ -31,22 +31,6 @@ public class Employee {
 
     public void setEname(String ename) {
         this.ename = ename;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
     }
 
     public int getCampus() {
