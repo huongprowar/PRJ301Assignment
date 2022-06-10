@@ -5,7 +5,7 @@
 package model;
 
 import java.util.ArrayList;
-import model.Employee;
+import model.Instructor;
 
 /**
  *
@@ -15,7 +15,7 @@ public class Campus {
 
     private int cid;
     private String cname;
-    private ArrayList<Employee> campuslist;
+    private ArrayList<Instructor> campuslist;
 
     public int getCid() {
         return cid;

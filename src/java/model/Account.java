@@ -4,7 +4,7 @@
  */
 package model;
 
-import model.Employee;
+import model.Instructor;
 
 /**
  *
@@ -14,7 +14,7 @@ public class Account {
 
     private String username;
     private String password;
-    private Employee employee;
+    private Instructor employee;
 
     public String getUsername() {
         return username;
@@ -32,11 +32,11 @@ public class Account {
         this.password = password;
     }
 
-    public Employee getEmployee() {
+    public Instructor getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(Instructor employee) {
         this.employee = employee;
     }
 

@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/model/Campus.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/model/Employee.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/model/Account.java</file>
             <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/EmpDBContext.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/view/login/login.jsp</file>
             <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/DBContext.java</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/view/login/login.jsp</file>
             <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/AccountDBContext.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/CampusDBContext.java</file>
         </group>
     </open-files>
 </project-private>

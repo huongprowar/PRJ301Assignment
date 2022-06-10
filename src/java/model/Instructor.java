@@ -10,27 +10,28 @@ import java.util.Date;
  *
  * @author Nam
  */
-public class Employee {
-    private int eid;
-    private String ename;
+public class Instructor {
+
+    private int iID;
+    private String iName;
+    private int campus;
 //    private Date date;
 //    private boolean gender;
-    private int campus;
 
-    public int getEid() {
-        return eid;
+    public int getiID() {
+        return iID;
     }
 
-    public void setEid(int eid) {
-        this.eid = eid;
+    public void setiID(int iID) {
+        this.iID = iID;
     }
 
-    public String getEname() {
-        return ename;
+    public String getiName() {
+        return iName;
     }
 
-    public void setEname(String ename) {
-        this.ename = ename;
+    public void setiName(String iName) {
+        this.iName = iName;
     }
 
     public int getCampus() {
@@ -40,5 +41,5 @@ public class Employee {
     public void setCampus(int campus) {
         this.campus = campus;
     }
-    
+
 }

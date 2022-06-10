@@ -10,51 +10,52 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Employee;
+import model.Instructor;
 
 /**
  *
  * @author Nam
  */
-public class EmpDBContext extends DBContext<Employee> {
+public class EmpDBContext extends DBContext<Instructor> {
 
     @Override
-    public ArrayList<Employee> list() {
+    public ArrayList<Instructor> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody       
     }
 
     @Override
-    public Employee get(String id) {
+    public Instructor get(String id) {
         try {
-            String sql = "select eid,ename from Employee\n"
-                    + "where eid = ?";
+            String sql = "select iID,iName from Instructor\n"
+                    + "where iID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
             ResultSet rs = stm.executeQuery();
             if(rs.next()){
-                Employee e = new Employee();
-                e.setEid(rs.getInt("eid"));
-                e.setEname(rs.getString("ename"));
+                Instructor e = new Instructor();
+                e.setiID(rs.getInt("eid"));
+                e.setiName(rs.getString("ename"));
                 e.setCampus(rs.getInt("campus"));
-                e.set(rs.getInt("campus"));
+                return e;
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmpDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     @Override
-    public void insert(Employee model) {
+    public void insert(Instructor model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Employee model) {
+    public void update(Instructor model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Employee model) {
+    public void delete(Instructor model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

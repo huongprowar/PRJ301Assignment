@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
-import model.Employee;
+import model.Instructor;
 
 /**
  *
@@ -19,20 +19,31 @@ import model.Employee;
  */
 public class AccountDBContext extends DBContext<Account> {
 
-    public Account getAccByUserAndPass(String user, String pass) {
+    public Account getAccByUserAndPass(String user, String pass, String role) {
         try {
-            String sql = "select username, eid from EAccount\n"
+            if (role.equals("Instructor")) {
+                role = "IAccount";
+            } else {
+                role = "SAccount";
+            }
+            String sql = "select username, iID from "+role+"\n"
                     + "where username = ? and password = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, user);
+            stm.setString(2, pass);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 Account acc = new Account();
                 acc.setUsername(rs.getString("username"));
-                Employee e = 
+                EmpDBContext empDB = new EmpDBContext();
+                Instructor emp = empDB.get(rs.getString("iID"));
+                acc.setEmployee(emp);
+                return acc;
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     @Override
