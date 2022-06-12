@@ -4,6 +4,7 @@
     Author     : Nam
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,14 @@
         <title>Attendance menu</title>
     </head>
     <body>
-        
+        <table>
+            <c:forEach items="${requestScope.groupList}" var="e">
+                <tr>
+                    <td>${e.gID}</td>
+                    <td>${e.cID}</td>
+                    <td>${e.iID}</td>
+                </tr>                  
+            </c:forEach>              
+        </table>
     </body>
 </html>

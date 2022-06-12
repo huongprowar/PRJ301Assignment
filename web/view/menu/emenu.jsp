@@ -12,6 +12,6 @@
         <title>Fap for Employee</title>
     </head>
     <body>
-        <input type="button" value="Attandance" onclick="window.location='view/attendance/attendancemenu.jsp'" >        
+        <a href="instructor/attendance" class="Attendance">Attendance</a>       
     </body>
 </html>
