@@ -32,13 +32,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <input type="button" value="View">
         </form>
         <style>
-            table, th, td {
-                border:1px solid black;
+            th, td {
+                border-bottom:1px solid black;
+            }
+            td:first-child{
+                width: 10%;
+            }
+            tr:first-child,tr:nth-child(2){
+                background-color: rgb(66, 212, 245);
             }
         </style>
         <table style="width:100%">
             <tr>
-                <td><select>
+                <td>
+                    Year
+                    <select>
                         <option>Year</option>
                     </select>
                 </td>
@@ -51,7 +59,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <td>Sunday</td>
             </tr>            
             <tr>
-                <td><select>
+                <td>Week
+                    <select>
                         <option>Week</option>
                     </select>
                 </td>
