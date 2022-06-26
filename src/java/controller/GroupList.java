@@ -9,19 +9,15 @@ import dal.GroupDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Group;
 
 /**
  *
  * @author Nam
  */
-@WebServlet(name="AttendanceController", urlPatterns={"/instructor/attendance"})
-public class AttendanceController extends HttpServlet {
+public class GroupList extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,7 +28,6 @@ public class AttendanceController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");       
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,9 +41,9 @@ public class AttendanceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        GroupDBContext gDB = new GroupDBContext();        
-        ArrayList<Group> groupList = gDB.getGroupByiID("sonnt5");
-        request.setAttribute("groupList", groupList);
+        String instructorID = "sonnt";
+        GroupDBContext groupDB = new GroupDBContext();
+        ArrayList<Lession>
         request.getRequestDispatcher("../view/attendance/groupList.jsp").forward(request, response);
     } 
 
@@ -62,7 +57,7 @@ public class AttendanceController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /** 

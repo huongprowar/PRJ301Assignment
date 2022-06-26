@@ -21,16 +21,15 @@ public class GroupDBContext extends DBContext<Group> {
     public ArrayList<Group> getGroupByiID(String iID) {
         ArrayList<Group> groupList = new ArrayList<>();
         try {
-            String sql = "select * from Groups\n"
-                    + "where iID = ?";
+            String sql = "select groupID,courseID from Groups\n"
+                    + "where groupID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, iID);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Group group = new Group();
                 group.setgID(rs.getString("gID"));
                 group.setcID(rs.getString("cID"));
-                group.setiID(rs.getString("iID"));
                 groupList.add(group);
             }
             return groupList;

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Group menu</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <style>
+        .list{
+            width: 100%;
+        }
+        table{
+            text-align: center;
+        }
+        tr:first-child{
+            background-color: rgb(66, 212, 245);
+        }
+        tr,td {
+            border-bottom:1px solid black;
+        }
+    </style>
+    <body>
+        <table class="list">
+            <tr>
+                <td>Index</td>
+                <td>Group</td>
+                <td>Course</td>
+                <td>Slot</td>                
+                <td>Instructor</td>
+                <td>Menu</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>SE1634</td>
+                <td>PRJ301</td>
+                <td>sonnt5</td>
+                <td>2</td>
+                <td><form action="groupInformation.jsp"><input type="submit" value="View" /></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>SE1634</td>
+                <td>PRJ301</td>
+                <td>sonnt5</td>
+                <td>3</td>
+                <td><form action="groupInformation.jsp"><input type="submit" value="View" /></td>
+            </tr>
+        </table>
+    </body>
+</html>

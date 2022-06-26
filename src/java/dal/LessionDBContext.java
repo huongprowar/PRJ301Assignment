@@ -10,65 +10,66 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Account;
-import model.Instructor;
+import model.Group;
+import model.Lession;
 
 /**
  *
  * @author Nam
  */
-public class AccountDBContext extends DBContext<Account> {
+public class LessionDBContext extends DBContext<Object> {
 
-    public Account getAccByUserAndPass(String user, String pass, String role) {
+        public ArrayList<Lession> getGroupByiID(String iID) {
+        ArrayList<Lession> lessionList = new ArrayList<>();
         try {
-            if (role.equals("Instructor")) {
-                role = "IAccount";
-            } else {
-                role = "SAccount";
-            }
-            String sql = "select username,instructorID from IAccount\n"
-                    + "where username = ? and password = ?";
+            String sql = "select g.groupID,g.courseID,l.lessionID,l.instructorID,l.lecture,l.slot,l.roomID\n"
+                    + "from Groups g\n"
+                    + "inner join Lession l\n"
+                    + "on g.groupID = l.groupID\n"
+                    + "where instructorID = ";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, user);
-            stm.setString(2, pass);
+            stm.setString(1, iID);
             ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                Account acc = new Account();
-                acc.setUsername(rs.getString("username"));
-                EmpDBContext empDB = new EmpDBContext();
-                Instructor emp = empDB.get(rs.getString("instructorID"));
-                acc.setEmployee(emp);
-                return acc;
+            while (rs.next()) {
+                Lession lession = new Lession();
+                lession.setLessionID(rs.getString("lesisonID"));
+                lession.setSlot(rs.getInt("slot"));
+                lession.setRoomID(rs.getString("lesisonID"));
+                GroupDBContext groupDB = new GroupDBContext();
+                lession.setGroupList(groupDB.getGroupByiID(rs.getString("groupID")));
+                In
+                groupList.add(lession);
             }
+            return groupList;
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-
+    
     @Override
-    public ArrayList<Account> list() {
+    public ArrayList<Object> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Account get(String id) {
+    public Object get(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void insert(Account model) {
+    public void insert(Object model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Account model) {
+    public void update(Object model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Account model) {
+    public void delete(Object model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }

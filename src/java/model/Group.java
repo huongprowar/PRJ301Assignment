@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Nam
@@ -12,7 +14,7 @@ public class Group {
 
     private String gID;
     private String cID;
-    private String iID;
+    private ArrayList<Student> studentList;
 
     public String getgID() {
         return gID;
@@ -30,12 +32,11 @@ public class Group {
         this.cID = cID;
     }
 
-    public String getiID() {
-        return iID;
+    public ArrayList<Student> getStudentList() {
+        return studentList;
     }
 
-    public void setiID(String iID) {
-        this.iID = iID;
+    public void setStudentList(ArrayList<Student> studentList) {
+        this.studentList = studentList;
     }
-
 }

@@ -73,7 +73,7 @@ public class LoginController extends HttpServlet {
         Account acc = accDB.getAccByUserAndPass(username, password, role);
         if (acc != null) {
             request.setAttribute("acc", acc);
-            request.getRequestDispatcher("/view/menu/emenu.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/imenu/imenu.jsp").forward(request, response);
         } else {
             response.getWriter().print("failed");
         }
