@@ -6,12 +6,15 @@
 package controller;
 
 import dal.GroupDBContext;
+import dal.LessionDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.Lession;
 
 /**
  *
@@ -42,9 +45,13 @@ public class GroupList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String instructorID = "sonnt";
-        GroupDBContext groupDB = new GroupDBContext();
-        ArrayList<Lession>
-        request.getRequestDispatcher("../view/attendance/groupList.jsp").forward(request, response);
+        LessionDBContext lessionDB = new LessionDBContext();
+        ArrayList<Lession> lessionList = lessionDB.getGroupByiID("sonnt");
+        Lession lession = lessionDB.getLessionByiID("sonnt");
+        
+        request.setAttribute("lession", lession);
+        request.setAttribute("lessionList", lessionList);
+        request.getRequestDispatcher("/view/attendance/groupList.jsp").forward(request, response);
     } 
 
     /** 

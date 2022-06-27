@@ -10,29 +10,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Group;
+import model.Instructor;
 
 /**
  *
  * @author Nam
  */
-public class GroupDBContext extends DBContext<Group> {
+public class InstructorDBContext extends DBContext<Object> {
 
-    public ArrayList<Group> getGroupByiID(String gID) {
-        ArrayList<Group> groupList = new ArrayList<>();
+    public Instructor getInstructorByiID(String iID) {
         try {
-            String sql = "select groupID,courseID from Groups\n"
-                    + "where groupID = ?";
+            String sql = "select instructorID,instructorName from Instructor\n"
+                    + "where instructorID= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, gID);
+            stm.setString(1, iID);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Group group = new Group();
-                group.setgID(rs.getString("groupID"));
-                group.setcID(rs.getString("courseID"));
-                groupList.add(group);
+            if(rs.next()){
+                Instructor instructor = new Instructor();
+                instructor.setID(rs.getString("instructorID"));
+                instructor.setName(rs.getString("instructorName"));
+                return instructor;
             }
-            return groupList;
         } catch (SQLException ex) {
             Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,27 +38,27 @@ public class GroupDBContext extends DBContext<Group> {
     }
 
     @Override
-    public ArrayList<Group> list() {
+    public ArrayList<Object> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Group get(String id) {
+    public Object get(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void insert(Group model) {
+    public void insert(Object model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Group model) {
+    public void update(Object model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Group model) {
+    public void delete(Object model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

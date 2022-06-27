@@ -15,8 +15,17 @@ public class Lession {
     private String lecture;
     private int slot;
     private String roomID;
+    private String course;
     private ArrayList<Group> groupList;
     private Instructor instructor;
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
 
     public String getLessionID() {
         return lessionID;

@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Group;
 import model.Lession;
+import model.Instructor;
 
 /**
  *
@@ -19,34 +20,66 @@ import model.Lession;
  */
 public class LessionDBContext extends DBContext<Object> {
 
-        public ArrayList<Lession> getGroupByiID(String iID) {
+    public ArrayList<Lession> getGroupByiID(String iID) {
         ArrayList<Lession> lessionList = new ArrayList<>();
         try {
             String sql = "select g.groupID,g.courseID,l.lessionID,l.instructorID,l.lecture,l.slot,l.roomID\n"
                     + "from Groups g\n"
                     + "inner join Lession l\n"
                     + "on g.groupID = l.groupID\n"
-                    + "where instructorID = ";
+                    + "where instructorID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, iID);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 Lession lession = new Lession();
-                lession.setLessionID(rs.getString("lesisonID"));
+                lession.setCourse(rs.getString("courseID"));
+                lession.setLecture(rs.getString("lecture"));;
+                lession.setLessionID(rs.getString("lessionID"));
                 lession.setSlot(rs.getInt("slot"));
-                lession.setRoomID(rs.getString("lesisonID"));
+                lession.setRoomID(rs.getString("roomID"));
                 GroupDBContext groupDB = new GroupDBContext();
                 lession.setGroupList(groupDB.getGroupByiID(rs.getString("groupID")));
-                In
-                groupList.add(lession);
+                InstructorDBContext instructorDB = new InstructorDBContext();
+                lession.setInstructor(instructorDB.getInstructorByiID(rs.getString("instructorID")));
+                lessionList.add(lession);
             }
-            return groupList;
+            return lessionList;
         } catch (SQLException ex) {
             Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
     
+     public Lession getLessionByiID(String iID) {        
+        try {
+            String sql = "select g.groupID,g.courseID,l.lessionID,l.instructorID,l.lecture,l.slot,l.roomID\n"
+                    + "from Groups g\n"
+                    + "inner join Lession l\n"
+                    + "on g.groupID = l.groupID\n"
+                    + "where instructorID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, iID);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Lession lession = new Lession();
+                lession.setCourse(rs.getString("courseID"));
+                lession.setLecture(rs.getString("lecture"));;
+                lession.setLessionID(rs.getString("lessionID"));
+                lession.setSlot(rs.getInt("slot"));
+                lession.setRoomID(rs.getString("roomID"));
+                GroupDBContext groupDB = new GroupDBContext();
+                lession.setGroupList(groupDB.getGroupByiID(rs.getString("groupID")));
+                InstructorDBContext instructorDB = new InstructorDBContext();
+                lession.setInstructor(instructorDB.getInstructorByiID(rs.getString("instructorID")));
+                return lession;
+            }            
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     @Override
     public ArrayList<Object> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -71,5 +104,5 @@ public class LessionDBContext extends DBContext<Object> {
     public void delete(Object model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

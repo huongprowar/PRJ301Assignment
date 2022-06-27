@@ -26,29 +26,50 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <body>
         <table class="list">
             <tr>
-                <td>Index</td>
-                <td>Group</td>
+                <td>ListID</td>
                 <td>Course</td>
-                <td>Slot</td>                
                 <td>Instructor</td>
+                <td>Slot</td>                
+                <td>Room</td>
                 <td>Menu</td>
+            </tr>             
+            <c:forEach items="${requestScope.lessionList}" var="lession">
+                <tr>                    
+                    <td>${lession.lessionID}</td>
+                    <td></td>
+                    <td>${lession.instructor.ID}</td>
+                    <td>${lession.slot}</td>
+                    <td>${lession.roomID}</td>
+                    <td><form action="groupInformation.jsp"><input type="submit" value="View" /></td>
+                </tr>
+            </c:forEach>
+
+
+
+
+
+            <!--
+            
+                        <tr>
+                <td>${requestScope.lessionList[0].roomID}</td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>SE1634</td>
-                <td>PRJ301</td>
-                <td>sonnt5</td>
-                <td>2</td>
-                <td><form action="groupInformation.jsp"><input type="submit" value="View" /></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>SE1634</td>
-                <td>PRJ301</td>
-                <td>sonnt5</td>
-                <td>3</td>
-                <td><form action="groupInformation.jsp"><input type="submit" value="View" /></td>
-            </tr>
+            
+                       <c:forEach items="${requestScope.dummies}" var="d">
+                <tr>
+                    <td>${d.id}</td>
+                    <td>${d.name}</td>
+                </tr>   
+            </c:forEach>
+            
+            <c:forEach items="${requestScope.lessionList}" var="l">
+                <tr>
+                    <td>2</td>
+                    <td>${l.lessionID}</td>
+                    <td></td>
+                    <td>${l.slot}</td>
+                    <td>${l.instructor.Name}</td>
+                </tr>
+            </c:forEach>   -->
         </table>
     </body>
 </html>

@@ -14,7 +14,7 @@ public class Group {
 
     private String gID;
     private String cID;
-    private ArrayList<Student> studentList;
+//    private ArrayList<Student> studentList;
 
     public String getgID() {
         return gID;
@@ -31,12 +31,12 @@ public class Group {
     public void setcID(String cID) {
         this.cID = cID;
     }
-
-    public ArrayList<Student> getStudentList() {
-        return studentList;
-    }
-
-    public void setStudentList(ArrayList<Student> studentList) {
-        this.studentList = studentList;
-    }
+//
+//    public ArrayList<Student> getStudentList() {
+//        return studentList;
+//    }
+//
+//    public void setStudentList(ArrayList<Student> studentList) {
+//        this.studentList = studentList;
+//    }
 }

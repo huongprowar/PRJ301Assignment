@@ -46,10 +46,10 @@ public class AttendanceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        GroupDBContext gDB = new GroupDBContext();        
-        ArrayList<Group> groupList = gDB.getGroupByiID("sonnt5");
-        request.setAttribute("groupList", groupList);
-        request.getRequestDispatcher("../view/attendance/groupList.jsp").forward(request, response);
+//        GroupDBContext gDB = new GroupDBContext();        
+//        ArrayList<Group> groupList = gDB.getGroupByiID("sonnt5");
+//        request.setAttribute("groupList", groupList);
+//        request.getRequestDispatcher("../view/attendance/groupList.jsp").forward(request, response);
     } 
 
     /** 

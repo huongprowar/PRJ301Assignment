@@ -12,26 +12,26 @@ import java.util.Date;
  */
 public class Instructor {
 
-    private int iID;
-    private String iName;
+    private String ID;
+    private String Name;
     private int campus;
 //    private Date date;
 //    private boolean gender;
 
-    public int getiID() {
-        return iID;
+    public String getID() {
+        return ID;
     }
 
-    public void setiID(int iID) {
-        this.iID = iID;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public String getiName() {
-        return iName;
+    public String getName() {
+        return Name;
     }
 
-    public void setiName(String iName) {
-        this.iName = iName;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     public int getCampus() {

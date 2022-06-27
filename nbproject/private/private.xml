@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/mockupscreen/instructorMenu.html</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/mockupscreen/groupInformation.html</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/LessionDBContext.java</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/controller/GroupList.java</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/InstructorDBContext.java</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/model/Lession.java</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/model/Group.java</file>
             <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/AccountDBContext.java</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/view/attendance/groupList.jsp</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/model/Instructor.java</file>
             <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/view/imenu/imenu.jsp</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/controller/AttendanceController.java</file>
         </group>
     </open-files>
 </project-private>
