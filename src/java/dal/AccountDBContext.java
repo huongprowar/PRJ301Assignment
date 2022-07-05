@@ -35,9 +35,9 @@ public class AccountDBContext extends DBContext<Account> {
             if (rs.next()) {
                 Account acc = new Account();
                 acc.setUsername(rs.getString("username"));
-                EmpDBContext empDB = new EmpDBContext();
-                Instructor emp = empDB.get(rs.getString("instructorID"));
-                acc.setEmployee(emp);
+                InstructorDBContext insDB = new InstructorDBContext();
+                Instructor ins = insDB.getInstructorByiID(rs.getString("instructorID"));
+                acc.setInstructor(ins);
                 return acc;
             }
         } catch (SQLException ex) {

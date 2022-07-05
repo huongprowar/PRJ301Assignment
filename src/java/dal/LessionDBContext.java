@@ -31,15 +31,15 @@ public class LessionDBContext extends DBContext<Object> {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, iID);
             ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Lession lession = new Lession();
                 lession.setCourse(rs.getString("courseID"));
-                lession.setLecture(rs.getString("lecture"));;
+                lession.setLecture(rs.getString("lecture"));
                 lession.setLessionID(rs.getString("lessionID"));
                 lession.setSlot(rs.getInt("slot"));
                 lession.setRoomID(rs.getString("roomID"));
                 GroupDBContext groupDB = new GroupDBContext();
-                lession.setGroupList(groupDB.getGroupByiID(rs.getString("groupID")));
+                lession.setGroup(groupDB.get(rs.getString("groupID")));
                 InstructorDBContext instructorDB = new InstructorDBContext();
                 lession.setInstructor(instructorDB.getInstructorByiID(rs.getString("instructorID")));
                 lessionList.add(lession);
@@ -69,7 +69,7 @@ public class LessionDBContext extends DBContext<Object> {
                 lession.setSlot(rs.getInt("slot"));
                 lession.setRoomID(rs.getString("roomID"));
                 GroupDBContext groupDB = new GroupDBContext();
-                lession.setGroupList(groupDB.getGroupByiID(rs.getString("groupID")));
+                lession.setGroup(groupDB.get(rs.getString("groupID")));
                 InstructorDBContext instructorDB = new InstructorDBContext();
                 lession.setInstructor(instructorDB.getInstructorByiID(rs.getString("instructorID")));
                 return lession;

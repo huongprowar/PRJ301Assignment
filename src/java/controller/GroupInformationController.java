@@ -4,24 +4,21 @@
  */
 package controller;
 
-import dal.AccountDBContext;
-import dal.CampusDBContext;
+import dal.StudentGroupDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import model.Account;
-import model.Campus;
+import model.Student_group;
 
 /**
  *
  * @author Nam
  */
-public class LoginController extends HttpServlet {
+public class GroupInformationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +31,6 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,10 +45,11 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CampusDBContext campDB = new CampusDBContext();
-        ArrayList<Campus> cList = campDB.list();
-        request.setAttribute("cList", cList);
-        request.getRequestDispatcher("/view/login/login.jsp").forward(request, response);
+        String gID = request.getParameter("gid");
+        StudentGroupDBContext sgDBContext = new StudentGroupDBContext();
+        ArrayList<Student_group> sgList = sgDBContext.listAllStudentInGroup(gID);
+        request.setAttribute("sgList", sgList);
+        request.getRequestDispatcher("/view/attendance/groupInformation.jsp").forward(request, response);
     }
 
     /**
@@ -66,17 +63,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("user");
-        String password = request.getParameter("pass");
-        String role = request.getParameter("role");
-        AccountDBContext accDB = new AccountDBContext();
-        Account acc = accDB.getAccByUserAndPass(username, password, role);
-        if (acc != null) {
-            request.setAttribute("acc", acc);
-            request.getRequestDispatcher("/view/imenu/imenu.jsp").forward(request, response);
-        } else {
-            response.getWriter().print("failed");
-        }
+        
     }
 
     /**

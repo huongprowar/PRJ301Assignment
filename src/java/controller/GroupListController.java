@@ -20,7 +20,7 @@ import model.Lession;
  *
  * @author Nam
  */
-public class GroupList extends HttpServlet {
+public class GroupListController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -44,12 +44,14 @@ public class GroupList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String instructorID = "sonnt";
-        LessionDBContext lessionDB = new LessionDBContext();
-        ArrayList<Lession> lessionList = lessionDB.getGroupByiID("sonnt");
-        Lession lession = lessionDB.getLessionByiID("sonnt");
         
-        request.setAttribute("lession", lession);
+        String instructorID = request.getParameter("instructorID");
+        LessionDBContext lessionDB = new LessionDBContext();
+        ArrayList<Lession> lessionList = lessionDB.getGroupByiID(instructorID);
+        
+        Lession lession = lessionDB.getLessionByiID(instructorID);
+        
+        request.setAttribute("lession", lession);        
         request.setAttribute("lessionList", lessionList);
         request.getRequestDispatcher("/view/attendance/groupList.jsp").forward(request, response);
     } 

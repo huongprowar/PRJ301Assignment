@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -37,8 +38,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <td>Name</td>
                 <td>Status</td>
             </tr>
-            <!--            
-            <c:forEach member>
+            <c:set var="i" value="0"></c:set>
+            <c:forEach items="${requestScope.sgList}" var="sg">
+                <c:set var="i" value="${i+1}"></c:set>
+                    <tr>
+                        <td>${i}</td>
+                        <td>${sg.student.studentName}</td>
+                        <td>${sg.student.studentID}</td>
+                        <td>${sg.group.gID}</td>
+                        <td><input type="radio" name="status" value="Present">Present
+                            <input type="radio" name="status" value="Present">Absent
+                        </td>
+                    </tr>                
+            </c:forEach>
+
+
+            <!--
             <tr>
                 <td>Index</td>
                 <td>Member</td>
@@ -46,7 +61,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <td>Name</td>
                 <td>Status(Present)(Absent)</td>
             </tr>
-            -->
+            
             <tr>
                 <td>1</td>
                 <td>namnhhe163297</td>
@@ -82,6 +97,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <td>Mai Van Tung</td>
                 <td><input type="radio" name="status" value="present">Present<input type="radio" name="status" value="absent">Absent</td>
             </tr>
+            -->
         </table>
         <form>
             <input type="submit" value="Save">

@@ -14,7 +14,7 @@ public class Account {
 
     private String username;
     private String password;
-    private Instructor employee;
+    private Instructor instructor;
 
     public String getUsername() {
         return username;
@@ -32,12 +32,12 @@ public class Account {
         this.password = password;
     }
 
-    public Instructor getEmployee() {
-        return employee;
+    public Instructor getInstructor() {
+        return instructor;
     }
 
-    public void setEmployee(Instructor employee) {
-        this.employee = employee;
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 
 }

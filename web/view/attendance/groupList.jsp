@@ -3,6 +3,9 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
 -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <html>
     <head>
         <title>Group menu</title>
@@ -24,52 +27,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         }
     </style>
     <body>
-        <table class="list">
-            <tr>
-                <td>ListID</td>
-                <td>Course</td>
-                <td>Instructor</td>
-                <td>Slot</td>                
-                <td>Room</td>
-                <td>Menu</td>
-            </tr>             
-            <c:forEach items="${requestScope.lessionList}" var="lession">
-                <tr>                    
-                    <td>${lession.lessionID}</td>
-                    <td></td>
-                    <td>${lession.instructor.ID}</td>
-                    <td>${lession.slot}</td>
-                    <td>${lession.roomID}</td>
-                    <td><form action="groupInformation.jsp"><input type="submit" value="View" /></td>
-                </tr>
-            </c:forEach>
-
-
-
-
-
-            <!--
-            
-                        <tr>
-                <td>${requestScope.lessionList[0].roomID}</td>
-            </tr>
-            
-                       <c:forEach items="${requestScope.dummies}" var="d">
+        <form action="view" method="GET">
+            <table class="list">
                 <tr>
-                    <td>${d.id}</td>
-                    <td>${d.name}</td>
-                </tr>   
-            </c:forEach>
-            
-            <c:forEach items="${requestScope.lessionList}" var="l">
-                <tr>
-                    <td>2</td>
-                    <td>${l.lessionID}</td>
-                    <td></td>
-                    <td>${l.slot}</td>
-                    <td>${l.instructor.Name}</td>
-                </tr>
-            </c:forEach>   -->
-        </table>
+                    <td>ListID</td>
+                    <td>Course</td>
+                    <td>Instructor</td>
+                    <td>Slot</td>                
+                    <td>Room</td>
+                    <td>Menu</td>
+                </tr>            
+                <c:forEach items="${requestScope.lessionList}" var="l">
+                    <tr>                    
+                        <td>${l.lessionID}</td>
+                        <td>${l.group.cID}</td>
+                        <td>${l.instructor.ID}</td>
+                        <td>${l.slot}</td>
+                        <td>${l.roomID}</td>
+                        <td><a href="view?gid=${l.group.gID}">View</a><input type="submit" value="View" /></td>                
+                    </tr>
+                </c:forEach>            
+            </table>        
+        </form>
     </body>
 </html>

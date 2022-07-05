@@ -10,7 +10,7 @@ public class Student {
 
     private String studentID;
     private String studentName;
-    private ArrayList<Group> groupID;
+    private ArrayList<Student_group> student_group;
 
     public String getStudentID() {
         return studentID;
@@ -28,11 +28,12 @@ public class Student {
         this.studentName = studentName;
     }
 
-    public ArrayList<Group> getGroupID() {
-        return groupID;
+    public ArrayList<Student_group> getStudent_group() {
+        return student_group;
     }
 
-    public void setGroupID(ArrayList<Group> groupID) {
-        this.groupID = groupID;
+    public void setStudent_group(ArrayList<Student_group> student_group) {
+        this.student_group = student_group;
     }
+
 }

@@ -10,52 +10,52 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Instructor;
+import model.Group;
+import model.Student;
 
 /**
  *
  * @author Nam
  */
-public class EmpDBContext extends DBContext<Instructor> {
+public class StudentDBContext extends DBContext<Student> {
 
     @Override
-    public ArrayList<Instructor> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody       
+    public ArrayList<Student> list() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Instructor get(String id) {
+    public Student get(String sid) {
         try {
-            String sql = "select iID,iName from Instructor\n"
-                    + "where iID = ?";
+            String sql = "select studentID,studentName from Student\n"
+                    + "where studentID= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, id);
+            stm.setString(1, sid);
             ResultSet rs = stm.executeQuery();
-            if(rs.next()){
-                Instructor e = new Instructor();
-                e.setiID(rs.getInt("eid"));
-                e.setiName(rs.getString("ename"));
-                e.setCampus(rs.getInt("campus"));
-                return e;
+            if (rs.next()) {
+                Student student = new Student();
+                student.setStudentID(rs.getString("studentID"));
+                student.setStudentName(rs.getString("studentName"));
+                return student;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EmpDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     @Override
-    public void insert(Instructor model) {
+    public void insert(Student model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Instructor model) {
+    public void update(Student model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Instructor model) {
+    public void delete(Student model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

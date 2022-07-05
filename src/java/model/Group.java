@@ -14,7 +14,8 @@ public class Group {
 
     private String gID;
     private String cID;
-//    private ArrayList<Student> studentList;
+    private String gName;
+//    private ArrayList<Student> studentList;    
 
     public String getgID() {
         return gID;

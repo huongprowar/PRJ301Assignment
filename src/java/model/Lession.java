@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -11,13 +12,15 @@ import java.util.ArrayList;
  * @author Nam
  */
 public class Lession {
+
     private String lessionID;
     private String lecture;
     private int slot;
     private String roomID;
     private String course;
-    private ArrayList<Group> groupList;
+    private Group group;
     private Instructor instructor;
+    private Date recordTime;
 
     public String getCourse() {
         return course;
@@ -59,12 +62,12 @@ public class Lession {
         this.roomID = roomID;
     }
 
-    public ArrayList<Group> getGroupList() {
-        return groupList;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupList(ArrayList<Group> groupList) {
-        this.groupList = groupList;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public Instructor getInstructor() {
@@ -74,6 +77,13 @@ public class Lession {
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
-    
-    
+
+    public Date getRecordTime() {
+        return recordTime;
+    }
+
+    public void setRecordTime(Date recordTime) {
+        this.recordTime = recordTime;
+    }
+
 }

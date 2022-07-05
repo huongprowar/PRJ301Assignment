@@ -10,7 +10,11 @@
     </servlet>
     <servlet>
         <servlet-name>GroupList</servlet-name>
-        <servlet-class>controller.GroupList</servlet-class>
+        <servlet-class>controller.GroupListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupInformationController</servlet-name>
+        <servlet-class>controller.GroupInformationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>GroupList</servlet-name>
         <url-pattern>/grouplist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupInformationController</servlet-name>
+        <url-pattern>/view</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
