@@ -50,8 +50,8 @@ public class LessionDBContext extends DBContext<Object> {
         }
         return null;
     }
-    
-     public Lession getLessionByiID(String iID) {        
+
+    public Lession getLessionByiID(String iID) {
         try {
             String sql = "select g.groupID,g.courseID,l.lessionID,l.instructorID,l.lecture,l.slot,l.roomID\n"
                     + "from Groups g\n"
@@ -73,7 +73,7 @@ public class LessionDBContext extends DBContext<Object> {
                 InstructorDBContext instructorDB = new InstructorDBContext();
                 lession.setInstructor(instructorDB.getInstructorByiID(rs.getString("instructorID")));
                 return lession;
-            }            
+            }
         } catch (SQLException ex) {
             Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -86,8 +86,32 @@ public class LessionDBContext extends DBContext<Object> {
     }
 
     @Override
-    public Object get(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Lession get(String lID) {
+                try {
+            String sql = "select lessionID,l.groupID,g.courseID,instructorID,lecture,slot,roomID,recordTime from Lession l\n"
+                    + "inner join Groups g on g.groupID = l.groupID\n"
+                    + "where lessionID= ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, lID);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Lession lession = new Lession();
+                lession.setLessionID(lID);
+                lession.setCourse(rs.getString("courseID"));
+                lession.setLecture(rs.getString("lecture"));
+                lession.setLessionID(rs.getString("lessionID"));
+                lession.setSlot(rs.getInt("slot"));
+                lession.setRoomID(rs.getString("roomID"));
+                GroupDBContext groupDB = new GroupDBContext();
+                lession.setGroup(groupDB.get(rs.getString("groupID")));
+                InstructorDBContext instructorDB = new InstructorDBContext();
+                lession.setInstructor(instructorDB.getInstructorByiID(rs.getString("instructorID")));
+                return lession;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override

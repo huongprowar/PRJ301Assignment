@@ -28,7 +28,33 @@ public class StudentGroupDBContext extends DBContext<Student_group> {
                 StudentDBContext sdb = new StudentDBContext();
                 GroupDBContext gdb = new GroupDBContext();
                 studentgroup.setStudent(sdb.get(rs.getString("studentID")));
-                studentgroup.setGroup(gdb.get(rs.getString("groupID")));                
+                studentgroup.setGroup(gdb.get(rs.getString("groupID")));
+
+                student_group.add(studentgroup);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentGroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return student_group;
+    }
+
+    public ArrayList<Student_group> listAllStudentInLession(String groupID, String lessionID) {
+        ArrayList<Student_group> student_group = new ArrayList<>();
+        try {
+            String sql = "SELECT sg.groupID, sg.studentID, s.studentName, sl.lessionID,sl.status FROM [Student_group] SG, [Student] S, [Student_lession] SL\n"
+                    + "WHERE \n"
+                    + "SG.groupID = ? AND S.studentID = SG.studentID AND\n" +
+            "S.studentID = SL.studentID AND SL.lessionID = ?";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setString(1, groupID);
+            stm.setString(2, lessionID);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Student_group studentgroup = new Student_group();
+                StudentDBContext sdb = new StudentDBContext();
+                GroupDBContext gdb = new GroupDBContext();
+                studentgroup.setStudent(sdb.get(rs.getString("studentID")));
+                studentgroup.setGroup(gdb.get(rs.getString("groupID")));
 
                 student_group.add(studentgroup);
             }

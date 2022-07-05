@@ -44,7 +44,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <td>${l.instructor.ID}</td>
                         <td>${l.slot}</td>
                         <td>${l.roomID}</td>
-                        <td><a href="view?gid=${l.group.gID}">View</a><input type="submit" value="View" /></td>                
+                        <td><a href="view?gid=${l.group.gID}&lessionID=${l.lessionID}">View</a></td>
                     </tr>
                 </c:forEach>            
             </table>        
