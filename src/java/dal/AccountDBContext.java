@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import model.Feature;
 import model.Instructor;
+import model.Role;
+import model.Student;
 
 /**
  *
@@ -21,23 +24,40 @@ public class AccountDBContext extends DBContext<Account> {
 
     public Account getAccByUserAndPass(String user, String pass, String role) {
         try {
+            String sql = "";
             if (role.equals("Instructor")) {
-                role = "IAccount";
+                sql = "select a.username,a.role, i.ID \n"
+                        + "from Account a\n"
+                        + "inner join Instructor i on i.userName = a.userName\n"
+                        + "where a.username = ? and password = ? and role = ?";
             } else {
-                role = "SAccount";
+                sql = "select a.username,a.role, s.ID \n"
+                        + "from Account a\n"
+                        + "inner join Student s on s.userName = a.userName\n"
+                        + "where a.username = ? and password = ? and role = ?";
             }
-            String sql = "select username,instructorID from IAccount\n"
-                    + "where username = ? and password = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, user);
             stm.setString(2, pass);
+            stm.setString(3, role);
+
             ResultSet rs = stm.executeQuery();
+
             if (rs.next()) {
                 Account acc = new Account();
+                Role newrole = new Role();
+                if (role.equals("Instructor")) {
+                    InstructorDBContext insDB = new InstructorDBContext();
+                    Instructor obj = insDB.get(rs.getString("ID"));
+                    acc.setPerson(obj);
+                } else {
+                    StudentDBContext stuDB = new StudentDBContext();
+                    Student obj = stuDB.get(rs.getString("ID"));
+                    acc.setPerson(obj);
+                }
+                RoleFeatureDBContext roleDB = new RoleFeatureDBContext();
+                acc.setRole(roleDB.get(role));
                 acc.setUsername(rs.getString("username"));
-                InstructorDBContext insDB = new InstructorDBContext();
-                Instructor ins = insDB.getInstructorByiID(rs.getString("instructorID"));
-                acc.setInstructor(ins);
                 return acc;
             }
         } catch (SQLException ex) {

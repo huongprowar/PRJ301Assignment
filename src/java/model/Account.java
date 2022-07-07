@@ -14,7 +14,8 @@ public class Account {
 
     private String username;
     private String password;
-    private Instructor instructor;
+    private Role role;
+    private Person person;
 
     public String getUsername() {
         return username;
@@ -32,12 +33,20 @@ public class Account {
         this.password = password;
     }
 
-    public Instructor getInstructor() {
-        return instructor;
+    public Role getRole() {
+        return role;
     }
 
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
 }

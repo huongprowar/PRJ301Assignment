@@ -6,34 +6,24 @@ package model;
 
 import java.util.ArrayList;
 
-public class Student {
+public class Student extends Person {
 
-    private String studentID;
-    private String studentName;
-    private ArrayList<Student_group> student_group;
+    private ArrayList<Group> student_group;
+    private ArrayList<Lession> student_lession;
 
-    public String getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public ArrayList<Student_group> getStudent_group() {
+    public ArrayList<Group> getStudent_group() {
         return student_group;
     }
 
-    public void setStudent_group(ArrayList<Student_group> student_group) {
+    public void setStudent_group(ArrayList<Group> student_group) {
         this.student_group = student_group;
     }
 
+    public ArrayList<Lession> getStudent_lession() {
+        return student_lession;
+    }
+
+    public void setStudent_lession(ArrayList<Lession> student_lession) {
+        this.student_lession = student_lession;
+    }
 }

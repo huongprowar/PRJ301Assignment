@@ -29,15 +29,16 @@ public class StudentDBContext extends DBContext<Student> {
     @Override
     public Student get(String sid) {
         try {
-            String sql = "select studentID,studentName from Student\n"
-                    + "where studentID= ?";
+            String sql = "select ID, Name, userName from Student\n"
+                    + "where ID= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, sid);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 Student student = new Student();
-                student.setStudentID(rs.getString("studentID"));
-                student.setStudentName(rs.getString("studentName"));
+                student.setId(rs.getString("ID"));
+                student.setName(rs.getString("Name"));
+                student.setUsername(rs.getString("userName"));
                 return student;
             }
         } catch (SQLException ex) {

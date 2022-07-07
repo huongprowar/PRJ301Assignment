@@ -25,9 +25,9 @@ public class InstructorDBContext extends DBContext<Object> {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, iID);
             ResultSet rs = stm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 Instructor instructor = new Instructor();
-                instructor.setID(rs.getString("instructorID"));
+                instructor.setId(rs.getString("instructorID"));
                 instructor.setName(rs.getString("instructorName"));
                 return instructor;
             }
@@ -43,8 +43,24 @@ public class InstructorDBContext extends DBContext<Object> {
     }
 
     @Override
-    public Object get(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Instructor get(String iID) {
+        try {
+            String sql = "select ID,Name,userName from Instructor\n"
+                    + "where ID= ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, iID);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Instructor instructor = new Instructor();
+                instructor.setId(rs.getString("ID"));
+                instructor.setName(rs.getString("Name"));
+                instructor.setUsername(rs.getString("userName"));
+                return instructor;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override

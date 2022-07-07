@@ -36,13 +36,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <h1>FPT University Academic Portal</h1>
         </div>
         <div class="status">
-            <span>Wekcome back ${acc.instructor.ID}</span>
+            <span>Welcome back ${acc.person.id}</span>
         </div>
         <div class="headerbox">
             <h2>Academic Information</h2>
         </div>
         <form action="grouplist" method="GET">            
-            <input type="hidden" name="instructorID" value="${acc.instructor.ID}">   
+            <input type="hidden" name="instructorID" value="${acc.person.id}">   
             <input type="submit" value="Attendance Menu"/> 
         </form>
     </body>

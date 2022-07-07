@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Account;
 import model.Campus;
@@ -72,8 +73,11 @@ public class LoginController extends HttpServlet {
         AccountDBContext accDB = new AccountDBContext();
         Account acc = accDB.getAccByUserAndPass(username, password, role);
         if (acc != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("acc", acc);
             request.setAttribute("acc", acc);
             request.getRequestDispatcher("/view/imenu/imenu.jsp").forward(request, response);
+            
         } else {
             response.getWriter().print("failed");
         }
