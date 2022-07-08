@@ -18,25 +18,6 @@ import model.Instructor;
  */
 public class InstructorDBContext extends DBContext<Object> {
 
-    public Instructor getInstructorByiID(String iID) {
-        try {
-            String sql = "select instructorID,instructorName from Instructor\n"
-                    + "where instructorID= ?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, iID);
-            ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                Instructor instructor = new Instructor();
-                instructor.setId(rs.getString("instructorID"));
-                instructor.setName(rs.getString("instructorName"));
-                return instructor;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
     @Override
     public ArrayList<Object> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

@@ -41,7 +41,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <tr>                    
                         <td>${l.lessionID}</td>
                         <td>${l.group.cID}</td>
-                        <td>${l.instructor.ID}</td>
+                        <td>${l.instructor.id}</td>
                         <td>${l.slot}</td>
                         <td>${l.roomID}</td>
                         <td><a href="view?gid=${l.group.gID}&lessionID=${l.lessionID}">View</a></td>

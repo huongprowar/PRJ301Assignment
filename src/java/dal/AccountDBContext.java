@@ -45,7 +45,6 @@ public class AccountDBContext extends DBContext<Account> {
 
             if (rs.next()) {
                 Account acc = new Account();
-                Role newrole = new Role();
                 if (role.equals("Instructor")) {
                     InstructorDBContext insDB = new InstructorDBContext();
                     Instructor obj = insDB.get(rs.getString("ID"));

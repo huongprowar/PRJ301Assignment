@@ -10,9 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Group;
 import model.Lession;
-import model.Instructor;
 
 /**
  *
@@ -40,8 +38,8 @@ public class LessionDBContext extends DBContext<Object> {
                 lession.setRoomID(rs.getString("roomID"));
                 GroupDBContext groupDB = new GroupDBContext();
                 lession.setGroup(groupDB.get(rs.getString("groupID")));
-                InstructorDBContext instructorDB = new InstructorDBContext();
-                lession.setInstructor(instructorDB.getInstructorByiID(rs.getString("instructorID")));
+                InstructorDBContext instructorDB = new InstructorDBContext();                
+                lession.setInstructor(instructorDB.get(rs.getString("instructorID")));
                 lessionList.add(lession);
             }
             return lessionList;
@@ -71,7 +69,7 @@ public class LessionDBContext extends DBContext<Object> {
                 GroupDBContext groupDB = new GroupDBContext();
                 lession.setGroup(groupDB.get(rs.getString("groupID")));
                 InstructorDBContext instructorDB = new InstructorDBContext();
-                lession.setInstructor(instructorDB.getInstructorByiID(rs.getString("instructorID")));
+                lession.setInstructor(instructorDB.get(rs.getString("instructorID")));
                 return lession;
             }
         } catch (SQLException ex) {
@@ -105,7 +103,7 @@ public class LessionDBContext extends DBContext<Object> {
                 GroupDBContext groupDB = new GroupDBContext();
                 lession.setGroup(groupDB.get(rs.getString("groupID")));
                 InstructorDBContext instructorDB = new InstructorDBContext();
-                lession.setInstructor(instructorDB.getInstructorByiID(rs.getString("instructorID")));
+                lession.setInstructor(instructorDB.get(rs.getString("instructorID")));
                 return lession;
             }
         } catch (SQLException ex) {
