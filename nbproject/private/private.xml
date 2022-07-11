@@ -5,12 +5,9 @@
         <group>
             <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/LessionDBContext.java</file>
             <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/StudentDBContext.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/dal/InstructorDBContext.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/model/Lession.java</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/view/attendance/groupList.jsp</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/controller/GroupInformationController.java</file>
             <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/web/view/attendance/groupInformation.jsp</file>
-            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/controller/GroupListController.java</file>
+            <file>file:/C:/Users/Nam/Documents/NetBeansProjects/Assignment/src/java/controller/SubmitAttendance.java</file>
         </group>
     </open-files>
 </project-private>

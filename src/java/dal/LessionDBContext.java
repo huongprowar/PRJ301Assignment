@@ -16,7 +16,7 @@ import model.Lession;
  *
  * @author Nam
  */
-public class LessionDBContext extends DBContext<Object> {
+public class LessionDBContext extends DBContext<Lession> {
 
     public ArrayList<Lession> getGroupByiID(String iID) {
         ArrayList<Lession> lessionList = new ArrayList<>();
@@ -38,7 +38,7 @@ public class LessionDBContext extends DBContext<Object> {
                 lession.setRoomID(rs.getString("roomID"));
                 GroupDBContext groupDB = new GroupDBContext();
                 lession.setGroup(groupDB.get(rs.getString("groupID")));
-                InstructorDBContext instructorDB = new InstructorDBContext();                
+                InstructorDBContext instructorDB = new InstructorDBContext();
                 lession.setInstructor(instructorDB.get(rs.getString("instructorID")));
                 lessionList.add(lession);
             }
@@ -79,16 +79,16 @@ public class LessionDBContext extends DBContext<Object> {
     }
 
     @Override
-    public ArrayList<Object> list() {
+    public ArrayList<Lession> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Lession get(String lID) {
-                try {
+        try {
             String sql = "select lessionID,l.groupID,g.courseID,instructorID,lecture,slot,roomID,recordTime from Lession l\n"
                     + "inner join Groups g on g.groupID = l.groupID\n"
-                    + "where lessionID= ?";
+                    + "where lessionID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, lID);
             ResultSet rs = stm.executeQuery();
@@ -112,18 +112,33 @@ public class LessionDBContext extends DBContext<Object> {
         return null;
     }
 
+    public void updateStatus(String studentID, String lessionID, int status) {
+        try {
+            String sql = "UPDATE [Student_lession]\n"
+                    + "   SET [status] = ?\n"
+                    + "WHERE studentID = ? and lessionID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, status);
+            stm.setString(2, studentID);
+            stm.setString(3, lessionID);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
-    public void insert(Object model) {
+    public void insert(Lession model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Object model) {
+    public void update(Lession model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Object model) {
+    public void delete(Lession model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

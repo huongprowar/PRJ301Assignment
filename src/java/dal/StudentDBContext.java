@@ -66,7 +66,7 @@ public class StudentDBContext extends DBContext<Student> {
                 student_group.add(studentgroup);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(StudentGroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return student_group;
     }
@@ -74,10 +74,10 @@ public class StudentDBContext extends DBContext<Student> {
     public ArrayList<Student_lession> listAllStudentInLession(String groupID, String lessionID) {
         ArrayList<Student_lession> student_lession = new ArrayList<>();
         try {
-            String sql = "SELECT sg.groupID, sg.studentID, s.studentName, sl.lessionID,sl.status FROM [Student_group] SG, [Student] S, [Student_lession] SL\n"
-                    + "WHERE \n"
-                    + "SG.groupID = ? AND S.studentID = SG.studentID AND\n"
-                    + "S.studentID = SL.studentID AND SL.lessionID = ?";
+            String sql = "select s.ID, s.Name, s.userName, sg.groupID, sl.status, sl.lessionID\n"
+                    + "from Student_group sg inner join Student s on sg.studentID = s.ID\n"
+                    + "inner join Student_lession sl on sg.studentID = sl.studentID\n"
+                    + "where sg.groupID = ? and sl.lessionID= ?";
             PreparedStatement stm = connection.prepareCall(sql);
             stm.setString(1, groupID);
             stm.setString(2, lessionID);
@@ -86,13 +86,14 @@ public class StudentDBContext extends DBContext<Student> {
                 Student_lession studentlession = new Student_lession();
                 StudentDBContext sdb = new StudentDBContext();
                 LessionDBContext ldb = new LessionDBContext();
-                studentlession.setStudent(sdb.get(rs.getString("studentID")));
+                studentlession.setStudent(sdb.get(rs.getString("ID")));
                 studentlession.setLession(ldb.get(rs.getString("lessionID")));
+                studentlession.setStatus(rs.getBoolean("status"));
 
                 student_lession.add(studentlession);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(StudentGroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return student_lession;
     }

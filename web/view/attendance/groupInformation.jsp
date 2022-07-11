@@ -46,16 +46,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <c:forEach items="${requestScope.slList}" var="sl">
                     <tr>
                         <td>${i}</td>
-                        <td>${sl.student.studentName}</td>
-                        <td>${sl.student.studentID}</td>
-                        <td>${sl.lession.group.gID}</td>
-                        <td><input type="radio" name="${sl.student.studentID}_status" value="present" <c:if test="${sl.status}"> checked="checked"</c:if>>Present
-                            <input type="radio" name="${sl.student.studentID}_status" value="absent" <c:if test="${!sl.status}"> checked="checked"</c:if>>Absent
+                        <td>${sl.student.username}</td>
+                        <td>${sl.student.id}</td>
+                        <td>${sl.student.name}</td>
+                        <td><input type="radio" name="${sl.student.id}" value="1" <c:if test="${sl.status}"> checked="checked"</c:if>>Present
+                            <input type="radio" name="${sl.student.id}" value="0" <c:if test="${!sl.status}"> checked="checked"</c:if>>Absent
                             </td>
                         </tr>                
                     <c:set var="i" value="${i+1}"></c:set>
                 </c:forEach>               
-            </table>            
+            </table>
+            <input type="hidden" name="lessionID" value="${requestScope.slList[0].lession.lessionID}">
             <input type="submit" value="Save">
         </form>
     </body>
