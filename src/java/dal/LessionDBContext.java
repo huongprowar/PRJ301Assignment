@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Lession;
+import model.Student_group;
 
 /**
  *
@@ -18,7 +19,7 @@ import model.Lession;
  */
 public class LessionDBContext extends DBContext<Lession> {
 
-    public ArrayList<Lession> getGroupByiID(String iID) {
+    public ArrayList<Lession> getGroupByInstructorID(String iID) {
         ArrayList<Lession> lessionList = new ArrayList<>();
         try {
             String sql = "select g.groupID,g.courseID,l.lessionID,l.instructorID,l.lecture,l.slot,l.roomID\n"
@@ -49,33 +50,71 @@ public class LessionDBContext extends DBContext<Lession> {
         return null;
     }
 
-    public Lession getLessionByiID(String iID) {
+    public ArrayList<Lession> getGroupByStudentID(String sID) {
+        ArrayList<Lession> lessionList = new ArrayList<>();
         try {
-            String sql = "select g.groupID,g.courseID,l.lessionID,l.instructorID,l.lecture,l.slot,l.roomID\n"
-                    + "from Groups g\n"
-                    + "inner join Lession l\n"
-                    + "on g.groupID = l.groupID\n"
-                    + "where instructorID = ?";
+            String sql = "select g.groupID, g.courseID, l.instructorID, l.slot, l.roomID, l.recordTime from Student_group sg\n"
+                    + "inner join Lession l on sg.groupID = l.groupID\n"
+                    + "inner join Groups g on sg.groupID = g.groupID\n"
+                    + "where sg.studentID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, iID);
+            stm.setString(1, sID);
             ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Lession lession = new Lession();
                 lession.setCourse(rs.getString("courseID"));
-                lession.setLecture(rs.getString("lecture"));;
-                lession.setLessionID(rs.getString("lessionID"));
                 lession.setSlot(rs.getInt("slot"));
                 lession.setRoomID(rs.getString("roomID"));
                 GroupDBContext groupDB = new GroupDBContext();
                 lession.setGroup(groupDB.get(rs.getString("groupID")));
                 InstructorDBContext instructorDB = new InstructorDBContext();
                 lession.setInstructor(instructorDB.get(rs.getString("instructorID")));
-                return lession;
+                lession.setRecordTime(rs.getDate("recordTime"));
+                lessionList.add(lession);
             }
+            return lessionList;
         } catch (SQLException ex) {
             Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void addStudentLession(String lessionID, String groupID) {
+        StudentDBContext sDB = new StudentDBContext();
+        ArrayList<Student_group> sgList = sDB.listAllStudentInGroup(groupID);
+        for (int i = 0; i < sgList.size(); i++) {
+            try {
+                String sql = "INSERT INTO [Student_lession]\n"
+                        + "           ([studentID]\n"
+                        + "           ,[lessionID]\n"
+                        + "           ,[status])\n"
+                        + "     VALUES\n"
+                        + "           (?\n"
+                        + "           ,?\n"
+                        + "           ,0)";
+                PreparedStatement stm = connection.prepareStatement(sql);
+                stm.setString(1, sgList.get(i).getStudent().getId());
+                stm.setString(2, lessionID);
+                stm.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(LessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void updateStatus(String studentID, String lessionID, int status) {
+        try {
+            String sql = "UPDATE [Student_lession]\n"
+                    + "   SET [status] = ?\n"
+                    + "WHERE studentID = ? and lessionID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, status);
+            stm.setString(2, studentID);
+            stm.setString(3, lessionID);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -110,21 +149,6 @@ public class LessionDBContext extends DBContext<Lession> {
             Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    public void updateStatus(String studentID, String lessionID, int status) {
-        try {
-            String sql = "UPDATE [Student_lession]\n"
-                    + "   SET [status] = ?\n"
-                    + "WHERE studentID = ? and lessionID = ?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, status);
-            stm.setString(2, studentID);
-            stm.setString(3, lessionID);
-            stm.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(LessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @Override

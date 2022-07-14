@@ -12,8 +12,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Map;
+import model.Account;
 import model.Student_lession;
 
 /**
@@ -52,16 +54,20 @@ public class SubmitAttendance extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");        
         StudentDBContext stuDB = new StudentDBContext();
         LessionDBContext lesDB = new LessionDBContext();
-        
         String lessionID = request.getParameter("lessionID");
-        Map<String,String[]> statusList = request.getParameterMap();        
+        Map<String, String[]> statusList = request.getParameterMap();
         for (Map.Entry<String, String[]> entry : statusList.entrySet()) {
             String key = entry.getKey();
             String[] val = entry.getValue();
-            if(key.contains("HE")) lesDB.updateStatus(key, lessionID, Integer.parseInt(val[0]));
+            if (key.contains("HE")) {
+                lesDB.updateStatus(key, lessionID, Integer.parseInt(val[0]));
+            }
         }
+        session.setAttribute("acc", acc);
     }
 
     /**

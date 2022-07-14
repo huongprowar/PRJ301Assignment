@@ -42,7 +42,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <h2>Academic Information</h2>
         </div>
         <form action="grouplist" method="GET">            
-            <input type="hidden" name="instructorID" value="${acc.person.id}">   
+            <input type="hidden" name="${acc.role.role}" value="${acc.person.id}">   
             <input type="submit" value="Attendance Menu"/> 
         </form>
     </body>

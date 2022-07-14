@@ -18,27 +18,6 @@ import model.Group;
  */
 public class GroupDBContext extends DBContext<Group> {
 
-    public ArrayList<Group> getGroupListByiID(String gID) {
-        ArrayList<Group> groupList = new ArrayList<>();
-        try {
-            String sql = "select groupID,courseID from Groups\n"
-                    + "where groupID = ?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, gID);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Group group = new Group();
-                group.setgID(rs.getString("groupID"));
-                group.setcID(rs.getString("courseID"));
-                groupList.add(group);
-            }
-            return groupList;
-        } catch (SQLException ex) {
-            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
     @Override
     public ArrayList<Group> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -47,7 +26,7 @@ public class GroupDBContext extends DBContext<Group> {
     @Override
     public Group get(String gID) {        
         try {
-            String sql = "select groupID,courseID from Groups\n"
+            String sql = "select groupID,courseID,groupName from Groups\n"
                     + "where groupID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, gID);
@@ -56,6 +35,7 @@ public class GroupDBContext extends DBContext<Group> {
                 Group group = new Group();
                 group.setgID(rs.getString("groupID"));
                 group.setcID(rs.getString("courseID"));
+                group.setgName(rs.getString("groupName"));
                 return group;
             }
             return null;

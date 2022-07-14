@@ -50,8 +50,8 @@ public class StudentDBContext extends DBContext<Student> {
     public ArrayList<Student_group> listAllStudentInGroup(String groupID) {
         ArrayList<Student_group> student_group = new ArrayList<>();
         try {
-            String sql = "select s.studentID,s.studentName,sg.groupID from Student s\n"
-                    + "inner join Student_group sg on s.studentID = sg.studentID\n"
+            String sql = "select s.ID,sg.groupID from Student s\n"
+                    + "inner join Student_group sg on s.ID = sg.studentID\n"
                     + "where sg.groupID = ?";
             PreparedStatement stm = connection.prepareCall(sql);
             stm.setString(1, groupID);
@@ -60,9 +60,8 @@ public class StudentDBContext extends DBContext<Student> {
                 Student_group studentgroup = new Student_group();
                 StudentDBContext sdb = new StudentDBContext();
                 GroupDBContext gdb = new GroupDBContext();
-                studentgroup.setStudent(sdb.get(rs.getString("studentID")));
+                studentgroup.setStudent(sdb.get(rs.getString("ID")));
                 studentgroup.setGroup(gdb.get(rs.getString("groupID")));
-
                 student_group.add(studentgroup);
             }
         } catch (SQLException ex) {

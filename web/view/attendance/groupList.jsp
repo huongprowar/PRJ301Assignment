@@ -30,22 +30,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <form action="view" method="GET">
             <table class="list">
                 <tr>
-                    <td>ListID</td>
+                    <td>Index</td>
                     <td>Course</td>
                     <td>Instructor</td>
                     <td>Slot</td>                
                     <td>Room</td>
                     <td>Menu</td>
                 </tr>            
+                <c:set var="i" value="1"></c:set>
                 <c:forEach items="${requestScope.lessionList}" var="l">
                     <tr>                    
-                        <td>${l.lessionID}</td>
+                        <td>${i}</td>
                         <td>${l.group.cID}</td>
                         <td>${l.instructor.id}</td>
                         <td>${l.slot}</td>
                         <td>${l.roomID}</td>
                         <td><a href="view?gid=${l.group.gID}&lessionID=${l.lessionID}">View</a></td>
                     </tr>
+                    <c:set var="i" value="${i+1}"></c:set>
                 </c:forEach>            
             </table>        
         </form>

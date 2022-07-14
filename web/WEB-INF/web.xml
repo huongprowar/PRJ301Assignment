@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>GroupInformationController</servlet-name>
-        <servlet-class>controller.GroupInformationController</servlet-class>
+        <servlet-class>controller.ViewGroupList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateAttendance</servlet-name>
@@ -23,10 +23,6 @@
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AttendanceController</servlet-name>
-        <url-pattern>/instructor/attendance</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GroupList</servlet-name>
@@ -40,6 +36,9 @@
         <servlet-name>UpdateAttendance</servlet-name>
         <url-pattern>/submitattendance</url-pattern>
     </servlet-mapping>
+
+
+    
     <session-config>
         <session-timeout>
             30

@@ -21,7 +21,7 @@ import model.Lession;
  *
  * @author Nam
  */
-public class GroupListController extends HttpServlet {
+public class GroupListController extends BaseAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,17 +46,20 @@ public class GroupListController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("acc");
         String userID = acc.getPerson().getId();
         LessionDBContext lessionDB = new LessionDBContext();
-        ArrayList<Lession> lessionList = lessionDB.getGroupByiID(userID);
-
+        ArrayList<Lession> lessionList = new ArrayList<>();
+        if (acc.getRole().getRole().equals("Instructor")) lessionList = lessionDB.getGroupByInstructorID(userID);
+        else if(acc.getRole().getRole().equals("Student")) lessionList = lessionDB.getGroupByStudentID(userID);
+        
         //Lession lession = lessionDB.getLessionByiID(userID);
 
-        //request.setAttribute("lession", lession);
+        //request.setAttribute("lession", lession);       
+        session.setAttribute("acc", acc);
         request.setAttribute("lessionList", lessionList);
         request.getRequestDispatcher("/view/attendance/groupList.jsp").forward(request, response);
     }
@@ -70,7 +73,7 @@ public class GroupListController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
     }
@@ -84,5 +87,4 @@ public class GroupListController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

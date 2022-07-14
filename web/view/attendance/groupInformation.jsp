@@ -31,8 +31,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     </style>
     <body>
         <h1 class="groupheader">Group Information</h1>
-        <h2>Group: SE1634</h2>
-        <h2>Course: PRJ301</h2>            
+        <h2>Group: ${requestScope.slList[0].lession.group.gName}</h2>
+        <h2>Course: ${requestScope.slList[0].lession.group.cID}</h2>            
         <form action="submitattendance" method="POST">
             <table>
                 <tr>

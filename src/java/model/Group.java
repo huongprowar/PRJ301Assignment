@@ -31,13 +31,13 @@ public class Group {
 
     public void setcID(String cID) {
         this.cID = cID;
+    }      
+
+    public String getgName() {
+        return gName;
     }
-//
-//    public ArrayList<Student> getStudentList() {
-//        return studentList;
-//    }
-//
-//    public void setStudentList(ArrayList<Student> studentList) {
-//        this.studentList = studentList;
-//    }
+
+    public void setgName(String gName) {
+        this.gName = gName;
+    }
 }
