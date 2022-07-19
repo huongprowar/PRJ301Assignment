@@ -79,6 +79,34 @@ public class LessionDBContext extends DBContext<Lession> {
         return null;
     }
 
+    public ArrayList<Lession> getWeeklyTimetableSlot(String studentID) {
+        ArrayList<Lession> timeTableList = new ArrayList<>();
+        try {
+            String sql = "select l.lessionID, g.groupName, g.courseID, l.slot, l.roomID, l.recordTime, l.instructorID from Lession l\n"
+                    + "inner join Student_lession sl on sl.lessionID = l.lessionID\n"
+                    + "inner join Groups g on g.groupID = l.groupID\n"
+                    + "where studentID= ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            GroupDBContext gDB = new GroupDBContext();
+            stm.setString(1, studentID);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Lession lession = new Lession();
+                lession.setLessionID(rs.getString("lessionID"));
+                lession.setGroup(gDB.get(rs.getString("groupName")));
+                lession.setCourse(rs.getString("courseID"));
+                lession.setSlot(rs.getInt("slot"));
+                lession.setRoomID(rs.getString("roomID"));
+                lession.setRecordTime(rs.getDate("recordTime"));
+                lession.setInstructor(new InstructorDBContext().get(rs.getString("instructorID")));
+                timeTableList.add(lession);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return timeTableList;
+    }
+
     public void addStudentLession(String lessionID, String groupID) {
         StudentDBContext sDB = new StudentDBContext();
         ArrayList<Student_group> sgList = sDB.listAllStudentInGroup(groupID);

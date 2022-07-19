@@ -13,7 +13,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import model.Account;
 import model.Lession;
 
@@ -50,30 +53,32 @@ public class GroupListController extends BaseAuthenticationController {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("acc");
+        session.setAttribute("acc", acc);
         String userID = acc.getPerson().getId();
         LessionDBContext lessionDB = new LessionDBContext();
         ArrayList<Lession> lessionList = new ArrayList<>();
-        if (acc.getRole().getRole().equals("Instructor")) lessionList = lessionDB.getGroupByInstructorID(userID);
-        else if(acc.getRole().getRole().equals("Student")) lessionList = lessionDB.getGroupByStudentID(userID);
-        
-        //Lession lession = lessionDB.getLessionByiID(userID);
+        if (acc.getRole().getRole().equals("Instructor")) {
+            lessionList = lessionDB.getGroupByInstructorID(userID);
+            request.setAttribute("lessionList", lessionList);
+            request.getRequestDispatcher("/view/attendance/groupList.jsp").forward(request, response);
+        } else if (acc.getRole().getRole().equals("Student")) {
+            response.sendRedirect("weeklytimetable");
+        }
 
+        //Lession lession = lessionDB.getLessionByiID(userID);
         //request.setAttribute("lession", lession);       
-        session.setAttribute("acc", acc);
-        request.setAttribute("lessionList", lessionList);
-        request.getRequestDispatcher("/view/attendance/groupList.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+/**
+ * Handles the HTTP <code>POST</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
     }
@@ -84,7 +89,7 @@ public class GroupListController extends BaseAuthenticationController {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 }
